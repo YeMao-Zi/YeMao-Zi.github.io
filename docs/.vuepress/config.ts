@@ -56,6 +56,10 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
                 link: "/note/wx-miniprogram/",
               },
               {
+                text: "Uniapp笔记",
+                link: "/note/uniapp/",
+              },
+              {
                 text: "JS设计模式总结",
                 link: "/pages/4643cd/",
               },
