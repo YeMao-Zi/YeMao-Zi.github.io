@@ -52,13 +52,14 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
                 link: "/note/git/",
               },
               {
+                text: "《Uniapp》",
+                link: "/note/uniapp/",
+              },
+              {
                 text: "小程序笔记",
                 link: "/note/wx-miniprogram/",
               },
-              {
-                text: "Uniapp笔记",
-                link: "/note/uniapp/",
-              },
+             
               {
                 text: "JS设计模式总结",
                 link: "/pages/4643cd/",
