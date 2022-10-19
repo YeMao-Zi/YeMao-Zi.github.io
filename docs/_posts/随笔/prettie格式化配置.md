@@ -1,3 +1,17 @@
+---
+title: prettie格式化配置
+date: 2022-09-22 14:50:23
+permalink: /pages/ab34a4/
+sidebar: auto
+categories:
+  - 随笔
+tags:
+  - 
+author: 
+  name: 夜猫子
+  link: https://github.com/zhushengjie123
+titleTag: 
+---
 添加.prettierrc.js文件配置
 
 ~~~js
