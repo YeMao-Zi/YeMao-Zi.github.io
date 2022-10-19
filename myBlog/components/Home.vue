@@ -132,7 +132,7 @@
           />
         </template>
 
-        <Content class="theme-vdoing-content custom card-box" />
+        <Content class="theme-content custom card-box" />
       </template>
 
       <template #mainRight>
@@ -472,7 +472,7 @@ export default {
         margin-bottom 0.9rem
       .pagination
         margin-bottom 4rem
-      .theme-vdoing-content
+      .theme-content
         padding 0 2rem
         overflow hidden
         &>:first-child

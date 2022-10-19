@@ -1,10 +1,10 @@
 <template>
   <div>
     <main class="page">
-      <div :class="`theme-vdoing-wrapper ${bgStyle}`">
+      <div :class="`theme-wrapper ${bgStyle}`">
         <ArticleInfo v-if="isArticle()" />
         <component
-          class="theme-vdoing-content"
+          class="theme-content"
           v-if="pageComponent"
           :is="pageComponent"
         />
@@ -24,7 +24,7 @@
 
           <slot name="top" v-if="isShowSlotT" />
 
-          <Content class="theme-vdoing-content" />
+          <Content class="theme-content" />
         </div>
         <slot name="bottom" v-if="isShowSlotB" />
         <PageEdit />
@@ -124,7 +124,7 @@ export default {
     padding-top: ($navbarHeight + 1.5rem)
   >*
     @extend $vdoing-wrapper
-.theme-vdoing-wrapper
+.theme-wrapper
   .content-wrapper
     position relative
   h1
@@ -144,7 +144,7 @@ export default {
       margin-right 0.2rem
       max-width 2.2rem
       max-height 2.2rem
-.theme-vdoing-wrapper
+.theme-wrapper
   --linesColor rgba(50, 0, 0, 0.05)
   &.bg-style-1 // 方格
     background-image linear-gradient(90deg, var(--linesColor) 3%, transparent 3%), linear-gradient(0deg, var(--linesColor) 3%, transparent 3%)
@@ -167,7 +167,7 @@ export default {
     background-size 10px 10px
 // 背景纹适应深色模式
 .theme-mode-dark
-  .theme-vdoing-wrapper
+  .theme-wrapper
     --linesColor rgba(125, 125, 125, 0.05)
 /**
  * 右侧菜单的自适应
