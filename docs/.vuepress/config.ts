@@ -6,7 +6,7 @@ import baiduCode from "./config/baiduCode"; // 百度统计hm码
 import htmlModules from "./config/htmlModules"; // 自定义插入的html块
 
 export default defineConfig4CustomTheme<blogConfig>({
-  // theme: "vdoing", 
+
   theme: resolve(__dirname, '../../myBlog'), // 使用本地主题
 
   locales: {
@@ -56,7 +56,10 @@ export default defineConfig4CustomTheme<blogConfig>({
                 text: "小程序笔记",
                 link: "/note/wx-miniprogram/",
               },
-             
+              {
+                text: "《Electron》",
+                link: "/note/electron/",
+              },
               {
                 text: "JS设计模式总结",
                 link: "/pages/4643cd/",
