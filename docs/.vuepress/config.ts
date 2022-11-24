@@ -287,8 +287,8 @@ export default defineConfig4CustomTheme<blogConfig>({
       {
         choosen: "gitalk",
         options: {
-          clientID: "a16f5441d2302ec96621",
-          clientSecret: "8b85ca6ce4286e281e4f8a1683c7fe47caa2a518",
+          clientID: "5e6eceb12d05bdb71cda",
+          clientSecret: "a2f7fa11553dcda70f0f92617ce4eda04a4ee281",
           repo: "blog-gitalk-comment", // GitHub 仓库
           owner: "zhushengjie123", // GitHub仓库所有者
           admin: ["zhushengjie123"], // 对仓库有写权限的人
