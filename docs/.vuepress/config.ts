@@ -261,7 +261,7 @@ export default defineConfig4CustomTheme<blogConfig>({
     ],
 
     [
-      "demo-block", // demo演示模块 https://github.com/xiguaxigua/vuepress-plugin-demo-block
+      "demo-block", // demo演示模块
       {
         settings: {
           // jsLib: ['http://xxx'], // 在线示例(jsfiddle, codepen)中的js依赖
@@ -287,8 +287,8 @@ export default defineConfig4CustomTheme<blogConfig>({
       {
         choosen: "gitalk",
         options: {
-          clientID: "5e6eceb12d05bdb71cda",
-          clientSecret: "0430aa9ada3f7226edbfa432eba6d044f7184a05",
+          clientID: "a16f5441d2302ec96621",
+          clientSecret: "8b85ca6ce4286e281e4f8a1683c7fe47caa2a518",
           repo: "blog-gitalk-comment", // GitHub 仓库
           owner: "zhushengjie123", // GitHub仓库所有者
           admin: ["zhushengjie123"], // 对仓库有写权限的人
