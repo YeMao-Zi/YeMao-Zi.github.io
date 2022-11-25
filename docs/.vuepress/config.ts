@@ -284,20 +284,30 @@ export default defineConfig4CustomTheme<blogConfig>({
     ],
     [
       "vuepress-plugin-comment", // 评论
+      // {
+      //   choosen: "gitalk",
+      //   options: {
+      //     clientID: "5e6eceb12d05bdb71cda",
+      //     clientSecret: "a2f7fa11553dcda70f0f92617ce4eda04a4ee281",
+      //     repo: "blog-gitalk-comment", // GitHub 仓库
+      //     owner: "zhushengjie123", // GitHub仓库所有者
+      //     admin: ["zhushengjie123"], // 对仓库有写权限的人
+      //     // distractionFreeMode: true,
+      //     pagerDirection: "last", // 'first'正序 | 'last'倒序
+      //     id: "<%- (frontmatter.permalink || frontmatter.to.path).slice(-16) %>", //  页面的唯一标识,长度不能超过50
+      //     title: "「评论」<%- frontmatter.title %>", // GitHub issue 的标题
+      //     labels: ["Gitalk", "Comment"], // GitHub issue 的标签
+      //     body: "页面：<%- window.location.origin + (frontmatter.to.path || window.location.pathname) %>", // GitHub issue 的内容
+      //   },
+      // },
       {
-        choosen: "gitalk",
+        choosen: "valine",
         options: {
-          clientID: "5e6eceb12d05bdb71cda",
-          clientSecret: "a2f7fa11553dcda70f0f92617ce4eda04a4ee281",
-          repo: "blog-gitalk-comment", // GitHub 仓库
-          owner: "zhushengjie123", // GitHub仓库所有者
-          admin: ["zhushengjie123"], // 对仓库有写权限的人
+          appId: "uYYVXeOP6qFlqnxydyT45TO4-gzGzoHsz",
+          appKey: "FOgEh8WLa29SzAZLHztXCsU5",
           // distractionFreeMode: true,
           pagerDirection: "last", // 'first'正序 | 'last'倒序
-          id: "<%- (frontmatter.permalink || frontmatter.to.path).slice(-16) %>", //  页面的唯一标识,长度不能超过50
-          title: "「评论」<%- frontmatter.title %>", // GitHub issue 的标题
-          labels: ["Gitalk", "Comment"], // GitHub issue 的标签
-          body: "页面：<%- window.location.origin + (frontmatter.to.path || window.location.pathname) %>", // GitHub issue 的内容
+          path: "<%- (frontmatter.permalink || frontmatter.to.path).slice(-16) %>", //  页面的唯一标识
         },
       },
     ],
