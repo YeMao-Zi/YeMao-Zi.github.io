@@ -82,7 +82,7 @@ function useDpState(dpCode) {
             } }, options));
     }, [devInfo === null || devInfo === void 0 ? void 0 : devInfo.devId]);
     
-    // 5.在生命周期中绑定监听
+    // 5.在生命周期中初始化一次 dp 数据
     (0, react_1.useEffect)(() => {
         if (devInfo === null || devInfo === void 0 ? void 0 : devInfo.devId) {
             _onDpDataChange(devInfo);
