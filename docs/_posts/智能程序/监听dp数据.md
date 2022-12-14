@@ -1,3 +1,17 @@
+---
+title: 监听dp数据
+date: 2022-11-29 17:22:42
+permalink: /pages/835d8d/
+sidebar: auto
+categories:
+  - 随笔
+tags:
+  - 
+author: 
+  name: 夜猫子
+  link: https://github.com/zhushengjie123
+titleTag: 
+---
 ## 一个 useDpState 源码
 
 依赖于 publishDps 和 onDpDataChange
