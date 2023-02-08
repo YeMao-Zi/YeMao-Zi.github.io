@@ -6,8 +6,7 @@ import baiduCode from "./config/baiduCode"; // 百度统计hm码
 import htmlModules from "./config/htmlModules"; // 自定义插入的html块
 
 export default defineConfig4CustomTheme<blogConfig>({
-
-  theme: resolve(__dirname, '../../myBlog'), // 使用本地主题
+  theme: resolve(__dirname, "../../myBlog"), // 使用本地主题
 
   locales: {
     "/": {
@@ -41,8 +40,8 @@ export default defineConfig4CustomTheme<blogConfig>({
               { text: "《Vue》", link: "/note/vue/" },
               { text: "《React》", link: "/note/react/" },
               {
-                text: '《TypeScript》',
-                link: '/note/typescript/',
+                text: "《TypeScript》",
+                link: "/note/typescript/",
               },
               {
                 text: "《Git》",
@@ -128,7 +127,6 @@ export default defineConfig4CustomTheme<blogConfig>({
     editLinks: true, // 启用编辑
     editLinkText: "编辑",
 
-
     // category: false, // 是否打开分类功能，默认true
     // tag: false, // 是否打开标签功能，默认true
     // archive: false, // 是否打开归档功能，默认true
@@ -194,10 +192,10 @@ export default defineConfig4CustomTheme<blogConfig>({
     },
     extendFrontmatter: {
       author: {
-        name: '夜猫子',
-        link: 'https://github.com/zhushengjie123'
+        name: "夜猫子",
+        link: "https://github.com/zhushengjie123",
       },
-      titleTag: '',
+      titleTag: "",
     },
     // 页脚信息
     footer: {
@@ -213,6 +211,7 @@ export default defineConfig4CustomTheme<blogConfig>({
   // 注入到页面<head>中的标签，格式[tagName, { attrName: attrValue }, innerHTML?]
   head: [
     ["link", { rel: "icon", href: "/img/heimaoio.webp" }], //favicons，资源放在public文件夹
+    ["link", { rel: "manifest", href: "/manifest.json" }], // pwa
     [
       "meta",
       {
@@ -243,17 +242,20 @@ export default defineConfig4CustomTheme<blogConfig>({
         hm: baiduCode,
       },
     ],
-
+    [
+      "@vuepress/pwa", // 开启 pwa
+      {
+        serviceWorker: true,
+        updatePopup: { message: "发现新内容可用", buttonText: "刷新" }
+      },
+    ],
     // 全文搜索
     "fulltext-search",
 
     [
       "one-click-copy", // 代码块复制按钮
       {
-        copySelector: [
-          'div[class*="language-"] pre',
-          'div[class*="aside-code"] aside',
-        ], // String or Array
+        copySelector: ['div[class*="language-"] pre', 'div[class*="aside-code"] aside'], // String or Array
         copyMessage: "复制成功", // default is 'Copy successfully and then paste it for use.'
         duration: 1000, // prompt message display time.
         showInMobile: false, // whether to display on the mobile side, default: false.
@@ -266,7 +268,7 @@ export default defineConfig4CustomTheme<blogConfig>({
         settings: {
           // jsLib: ['http://xxx'], // 在线示例(jsfiddle, codepen)中的js依赖
           // cssLib: ['http://xxx'], // 在线示例中的css依赖
-          vue: 'https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js', // 在线示例中的vue依赖
+          vue: "https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js", // 在线示例中的vue依赖
           jsfiddle: false, // 是否显示 jsfiddle 链接
           codepen: true, // 是否显示 codepen 链接
           horizontal: false, // 是否展示为横向样式
