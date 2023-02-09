@@ -1,6 +1,6 @@
 import { resolve } from "path";
 import { defineConfig4CustomTheme, UserPlugins } from "vuepress/config";
-import { blogConfig } from "./config/blogConfig";
+import { blogConfig } from "../../myBlog/types/index";
 import dayjs from "dayjs";
 import baiduCode from "./config/baiduCode"; // 百度统计hm码
 import htmlModules from "./config/htmlModules"; // 自定义插入的html块
@@ -233,6 +233,12 @@ export default defineConfig4CustomTheme<blogConfig>({
 
   // 插件配置
   plugins: <UserPlugins>[
+    // [
+    //   "sitemap", // 网站地图
+    //   {
+    //     hostname: 'https://zhushengjie123.github.io',
+    //   },
+    // ],
     "vuepress-plugin-baidu-autopush", // 百度自动推送
 
     [
@@ -241,8 +247,30 @@ export default defineConfig4CustomTheme<blogConfig>({
         hm: baiduCode,
       },
     ],
-    // 全文搜索
-    "fulltext-search",
+    // 全文搜索 已弃用：此插件会在打开网站时多加载部分js文件用于搜索，导致初次访问网站变慢。
+    // "fulltext-search",
+
+    // 可以添加第三方搜索链接的搜索框（继承原官方搜索框的配置参数）
+    [
+      "thirdparty-search",
+      {
+        thirdparty: [
+          {
+            title: "在MDN中搜索",
+            frontUrl: "https://developer.mozilla.org/zh-CN/search?q=", // 搜索链接的前面部分
+            behindUrl: "", // 搜索链接的后面部分，可选，默认 ''
+          },
+          {
+            title: "在Runoob中搜索",
+            frontUrl: "https://www.runoob.com/?s=",
+          },
+          {
+            title: "在Bing中搜索",
+            frontUrl: "https://cn.bing.com/search?q=",
+          }
+        ],
+      },
+    ],
 
     [
       "one-click-copy", // 代码块复制按钮
@@ -260,7 +288,9 @@ export default defineConfig4CustomTheme<blogConfig>({
         settings: {
           // jsLib: ['http://xxx'], // 在线示例(jsfiddle, codepen)中的js依赖
           // cssLib: ['http://xxx'], // 在线示例中的css依赖
-          vue: "https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js", // 在线示例中的vue依赖
+          // vue: "https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js", // 在线示例中的vue依赖
+          // react: "https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js", // 在线示例中的react依赖
+          // reactDOM: "https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js", // 在线示例中的reactDOM依赖
           jsfiddle: false, // 是否显示 jsfiddle 链接
           codepen: true, // 是否显示 codepen 链接
           horizontal: false, // 是否展示为横向样式
