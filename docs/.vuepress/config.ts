@@ -241,14 +241,14 @@ export default defineConfig4CustomTheme<blogConfig>({
 
   // 插件配置
   plugins: <UserPlugins>[
-    "vuepress-plugin-baidu-autopush", // 百度自动推送
+    // "vuepress-plugin-baidu-autopush", // 百度自动推送
 
-    [
-      "vuepress-plugin-baidu-tongji", // 百度统计
-      {
-        hm: baiduCode,
-      },
-    ],
+    // [
+    //   "vuepress-plugin-baidu-tongji", // 百度统计
+    //   {
+    //     hm: baiduCode,
+    //   },
+    // ],
     [
       "@vuepress/pwa", // 开启 pwa
       {
