@@ -5,7 +5,7 @@ type NoSidebar4DefaultThemeConfig = Omit<DefaultThemeConfig, 'sidebar'> // 忽�
 /**
  * 主题配置类型
  */
-export interface VdoingThemeConfig extends NoSidebar4DefaultThemeConfig {
+export interface blogConfig extends NoSidebar4DefaultThemeConfig {
   /**
    * 是否打开分类功能. Enable classification
    * @default true
