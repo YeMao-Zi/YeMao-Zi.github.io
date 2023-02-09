@@ -211,7 +211,14 @@ export default defineConfig4CustomTheme<blogConfig>({
   // 注入到页面<head>中的标签，格式[tagName, { attrName: attrValue }, innerHTML?]
   head: [
     ["link", { rel: "icon", href: "/img/heimaoio.webp" }], //favicons，资源放在public文件夹
-    // ["link", { rel: "manifest", href: "/manifest.json" }], // pwa
+    ["link", { rel: "manifest", href: "/manifest.json" }], // pwa
+    ['meta', { name: 'theme-color', content: '#42b983' }],
+    ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
+    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
+    ['link', { rel: 'apple-touch-icon', href: '/img/io.webp' }],
+    ['link', { rel: 'mask-icon', href: '/img/maobi.webp', color: '#42b983' }],
+    ['meta', { name: 'msapplication-TileImage', content: '/img/io.webp' }],
+    ['meta', { name: 'msapplication-TileColor', content: '#000000' }],
     [
       "meta",
       {
@@ -242,13 +249,13 @@ export default defineConfig4CustomTheme<blogConfig>({
         hm: baiduCode,
       },
     ],
-    // [
-    //   "@vuepress/pwa", // 开启 pwa
-    //   {
-    //     serviceWorker: true,
-    //     updatePopup: { message: "发现新内容可用", buttonText: "刷新" }
-    //   },
-    // ],
+    [
+      "@vuepress/pwa", // 开启 pwa
+      {
+        serviceWorker: true,
+        updatePopup: { message: "发现新内容可用", buttonText: "刷新" }
+      },
+    ],
     // 全文搜索
     "fulltext-search",
 

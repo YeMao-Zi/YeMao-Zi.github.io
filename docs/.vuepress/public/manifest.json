@@ -3,16 +3,16 @@
   "short_name": "夜猫子的知识栈",
   "display": "standalone",
   "background_color": "#fff",
-  "start_url": ".",
+  "start_url": "/index.html",
   "description": "个人学习、记录博客",
   "icons": [
     {
-      "src": "./img/io.webp",
+      "src": "/img/io.webp",
       "sizes": "52x52",
       "type": "image/webp"
     },
     {
-      "src": "./img/heimao.webp",
+      "src": "/img/heimao.webp",
       "sizes": "288x288",
       "type": "image/webp"
     }
