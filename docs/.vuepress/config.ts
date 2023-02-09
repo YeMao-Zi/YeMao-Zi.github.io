@@ -233,12 +233,6 @@ export default defineConfig4CustomTheme<blogConfig>({
 
   // 插件配置
   plugins: <UserPlugins>[
-    [
-      "sitemap", // 网站地图
-      {
-        hostname: "zhushengjie123.github.io",
-      },
-    ],
     "vuepress-plugin-baidu-autopush", // 百度自动推送
 
     [
