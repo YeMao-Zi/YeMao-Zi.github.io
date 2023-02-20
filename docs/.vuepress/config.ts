@@ -248,29 +248,29 @@ export default defineConfig4CustomTheme<blogConfig>({
     //   },
     // ],
     // 全文搜索
-    // "fulltext-search",// 此插件会在打开网站时多加载部分js文件用于搜索，导致初次访问网站变慢。如在意初次访问速度的话可以不使用此插件！
+    "fulltext-search",// 此插件会在打开网站时多加载部分js文件用于搜索，导致初次访问网站变慢。如在意初次访问速度的话可以不使用此插件！
 
-    // 可以添加第三方搜索链接的搜索框（继承原官方搜索框的配置参数）
-    [
-      "thirdparty-search",
-      {
-        thirdparty: [
-          {
-            title: "在MDN中搜索",
-            frontUrl: "https://developer.mozilla.org/zh-CN/search?q=", // 搜索链接的前面部分
-            behindUrl: "", // 搜索链接的后面部分，可选，默认 ''
-          },
-          {
-            title: "在Runoob中搜索",
-            frontUrl: "https://www.runoob.com/?s=",
-          },
-          {
-            title: "在Bing中搜索",
-            frontUrl: "https://cn.bing.com/search?q=",
-          }
-        ],
-      },
-    ],
+    // 可以添加第三方搜索链接的搜索框（继承原官方搜索框的配置参数,只能在服务器环境，githubPages中会报错）
+    // [
+    //   "thirdparty-search",
+    //   {
+    //     thirdparty: [
+    //       {
+    //         title: "在MDN中搜索",
+    //         frontUrl: "https://developer.mozilla.org/zh-CN/search?q=", // 搜索链接的前面部分
+    //         behindUrl: "", // 搜索链接的后面部分，可选，默认 ''
+    //       },
+    //       {
+    //         title: "在Runoob中搜索",
+    //         frontUrl: "https://www.runoob.com/?s=",
+    //       },
+    //       {
+    //         title: "在Bing中搜索",
+    //         frontUrl: "https://cn.bing.com/search?q=",
+    //       }
+    //     ],
+    //   },
+    // ],
 
     [
       "one-click-copy", // 代码块复制按钮
@@ -309,7 +309,7 @@ export default defineConfig4CustomTheme<blogConfig>({
     [
       "vuepress-plugin-comment", // 评论
       // {
-      //   choosen: "gitalk",
+      //   choosen: "gitalk",(我调试的时候之前好了一段时间，后来githubPages就报错了,应该是域名问题,可以自己捣鼓捣鼓,如果嫌麻烦可以直接用三方的)
       //   options: {
       //     clientID: "5e6eceb12d05bdb71cda",
       //     clientSecret: "a2f7fa11553dcda70f0f92617ce4eda04a4ee281",
