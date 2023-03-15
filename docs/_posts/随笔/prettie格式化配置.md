@@ -20,7 +20,7 @@ module.exports = {
   tabWidth: 2, //缩进长度
   useTabs: false, //使用空格代替tab缩进
   semi: true, //句末使用分号
-  singleQuote: true, //使用单引号
+  singleQuote: false, //使用单引号
   quoteProps: 'as-needed', //仅在必需时为对象的key添加引号
   jsxSingleQuote: true, // jsx中使用单引号
   trailingComma: 'all', //多行时尽可能打印尾随逗号
@@ -37,7 +37,7 @@ module.exports = {
 };
 ~~~
 
-在package.json中配置
+在package.json中配置或在 .prettierrc.json 中配置
 
 ~~~js
   "prettier":{
@@ -45,7 +45,7 @@ module.exports = {
       "tabWidth": 2, 
       "useTabs": false,
       "semi": true,
-      "singleQuote": true, 
+      "singleQuote": false, 
       "quoteProps": "as-needed", 
       "jsxSingleQuote": true,
       "trailingComma": "all", 

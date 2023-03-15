@@ -60,6 +60,10 @@ export default defineConfig4CustomTheme<blogConfig>({
                 link: "/note/electron/",
               },
               {
+                text: "《Node》",
+                link: "/note/node/",
+              },
+              {
                 text: "JS设计模式总结",
                 link: "/pages/4643cd/",
               },
