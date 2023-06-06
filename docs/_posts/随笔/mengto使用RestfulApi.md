@@ -85,7 +85,7 @@ get V1/wishlist/customer/items?customerId={customer id}
 
 - 获取可用运货方法
 
-  post V1/carts/ine/shipping-methods
+  post V1/carts/mine/shipping-methods
   输入：收货地址
   
   ```js
@@ -542,7 +542,19 @@ GET /V1/products/:sku/reviews
 
 
 
+## 更新邮箱地址
 
+put rest/V1/customers/me
+
+
+
+## 获取用户订单
+
+get `/rest/V1/orders/custom?searchCriteria[filter_groups][0][filters][0][field]=customer_id&searchCriteria[filter_groups][0][filters][0][value]=5&searchCriteria[filter_groups][0][filters][0][condition_type]=like`
+
+get `/rest/V1/orders? searchCriteria[filter_g‌roups][0][filters][0‌][field]=stat‌us& searchCriteria[filter_groups][0][filters][0][value]=pending& searchCriteria[filter_groups][0][filters][0][condition_type]‌‌=eq& searchCriteria[filter_groups][0][filters][1][field]=customer‌_email& searchCriteria[filter_groups][0][filters][1][value]=aaa@gmai‌l.com& searchCriteria[filter_groups][0][filters][1][condition_type]‌‌=eq`
+
+用户信息相关接口：无法修改默认地址，无法修改订阅状态
 
 更新购物车
 
@@ -551,4 +563,8 @@ GET /V1/products/:sku/reviews
 添加优惠劵
 
 删除优惠劵
+
+添加购物车地址
+
+
 
