@@ -69,6 +69,10 @@ export default defineConfig4CustomTheme<blogConfig>({
               },
             ],
           },
+          {
+            text: "全栈项目",
+            items: [{ text: "前言", link: "/note/ask517/" }],
+          },
         ],
       },
       {
