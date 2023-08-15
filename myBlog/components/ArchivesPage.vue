@@ -125,7 +125,7 @@ export default {
 
 .archives-page
   .theme-wrapper
-    @extend $vdoing-wrapper
+    @extend $yemao-zi-wrapper
     position relative
     @media (min-width $contentWidth + 80)
       margin-top 1.5rem !important

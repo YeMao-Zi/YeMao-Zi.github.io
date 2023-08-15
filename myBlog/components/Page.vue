@@ -123,7 +123,7 @@ export default {
   @media (min-width $MQMobile)
     padding-top: ($navbarHeight + 1.5rem)
   >*
-    @extend $vdoing-wrapper
+    @extend $yemao-zi-wrapper
 .theme-wrapper
   .content-wrapper
     position relative
