@@ -1,3 +1,17 @@
+---
+title: 解决CRLF与LF冲突
+date: 2023-03-14 10:55:49
+permalink: /pages/3643b8/
+sidebar: auto
+categories:
+  - 随笔
+tags:
+  - 
+author: 
+  name: 夜猫子
+  link: https://github.com/yemao-zi
+titleTag: 
+---
 ### 起因
 
 日常开发过程中，前端同学有的用macos，有的用windows，这两个平台在处理文件换行符的时候，默认会用不同的处理方式。
