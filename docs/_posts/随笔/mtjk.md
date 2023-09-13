@@ -1,3 +1,19 @@
+---
+title: mtjk
+date: 2023-09-11 09:25:40
+permalink: /pages/8847a3/
+sidebar: auto
+categories:
+  - 随笔
+tags:
+  - 
+author: 
+  name: 夜猫子
+  link: https://github.com/yemao-zi
+titleTag: 
+---
+# 智能标签
+
 ## h5添加智能推荐标签
 
 ### 套餐推荐
@@ -73,6 +89,11 @@ toSubmitOrder() params新增入参字段
       "RiskPackageIds": aiRiskPackageIds,
       // 1-按风险值 2-按照套餐和项目
       "recommendType": aiRecommendType
-  }
+  }1
 ```
 
+# 查看体检报告详情问卷控制
+
+页面：report/ReportView.jsx
+
+![image-20230913141255147](https://s2.loli.net/2023/09/13/Lr8wy3jbcH2fhdJ.png)

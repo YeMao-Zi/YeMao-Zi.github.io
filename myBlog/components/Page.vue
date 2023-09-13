@@ -1,22 +1,16 @@
 <template>
   <div>
-    <main class="page">
+    <main v-if="!isLoack" class="page">
       <div :class="`theme-wrapper ${bgStyle}`">
         <ArticleInfo v-if="isArticle()" />
-        <component
-          class="theme-content"
-          v-if="pageComponent"
-          :is="pageComponent"
-        />
+        <component class="theme-content" v-if="pageComponent" :is="pageComponent" />
 
         <div class="content-wrapper">
           <RightMenu v-if="showRightMenu" />
 
           <h1 v-if="showTitle">
-            <img
-              :src="currentBadge"
-              v-if="$themeConfig.titleBadge === false ? false : true"
-            />{{ this.$page.title
+            <img :src="currentBadge" v-if="$themeConfig.titleBadge === false ? false : true" />{{
+              this.$page.title
             }}<span class="title-tag" v-if="$frontmatter.titleTag">{{
               $frontmatter.titleTag
             }}</span>
@@ -38,78 +32,105 @@
         v-if="isShowUpdateBar"
       />
     </main>
+    <div v-else class="page">
+      <div>
+        <label for="lock">Lock:</label>
+        <input id="lock" name="lock" type="text" placeholder="请输入页面密码" v-model="lockValue" />
+        <button @click="confirmLock">确定</button>
+        <span style="color: red;" v-show="showVerify">密码错误</span>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import PageEdit from '@theme/components/PageEdit.vue'
-import PageNav from '@theme/components/PageNav.vue'
-import ArticleInfo from './ArticleInfo.vue'
-import Catalogue from './Catalogue.vue'
-import UpdateArticle from './UpdateArticle.vue'
-import RightMenu from './RightMenu.vue'
+import PageEdit from "@theme/components/PageEdit.vue";
+import PageNav from "@theme/components/PageNav.vue";
+import ArticleInfo from "./ArticleInfo.vue";
+import Catalogue from "./Catalogue.vue";
+import UpdateArticle from "./UpdateArticle.vue";
+import RightMenu from "./RightMenu.vue";
 
-import TitleBadgeMixin from '../mixins/titleBadge'
+import TitleBadgeMixin from "../mixins/titleBadge";
 
 export default {
   mixins: [TitleBadgeMixin],
   data() {
     return {
-      updateBarConfig: null
-    }
+      updateBarConfig: null,
+      isLoack: false,
+      lockValue: "",
+      showVerify: false,
+    };
   },
-  props: ['sidebarItems'],
+  props: ["sidebarItems"],
   components: { PageEdit, PageNav, ArticleInfo, Catalogue, UpdateArticle, RightMenu },
   created() {
-    this.updateBarConfig = this.$themeConfig.updateBar
+    console.log(this.$frontmatter, "frontmatter");
+    this.updateBarConfig = this.$themeConfig.updateBar;
+    if (this.$frontmatter.lock) {
+      this.isLoack = true;
+    }
   },
   computed: {
     bgStyle() {
-      const { contentBgStyle } = this.$themeConfig
-      return contentBgStyle ? 'bg-style-' + contentBgStyle : ''
+      const { contentBgStyle } = this.$themeConfig;
+      return contentBgStyle ? "bg-style-" + contentBgStyle : "";
     },
     isShowUpdateBar() {
-      return this.updateBarConfig && this.updateBarConfig.showToArticle === false ? false : true
+      return this.updateBarConfig && this.updateBarConfig.showToArticle === false ? false : true;
     },
     showTitle() {
-      return !this.$frontmatter.pageComponent
+      return !this.$frontmatter.pageComponent;
     },
     showRightMenu() {
-      const { $frontmatter, $themeConfig, $page } = this
-      const { sidebar } = $frontmatter
+      const { $frontmatter, $themeConfig, $page } = this;
+      const { sidebar } = $frontmatter;
       return (
         $themeConfig.rightMenuBar !== false &&
         $page.headers &&
         ($frontmatter && sidebar && sidebar !== false) !== false
-      )
+      );
     },
     pageComponent() {
-      return this.$frontmatter.pageComponent ? this.$frontmatter.pageComponent.name : false
+      return this.$frontmatter.pageComponent ? this.$frontmatter.pageComponent.name : false;
     },
     isShowSlotT() {
-      return this.getShowStatus('pageTshowMode')
+      return this.getShowStatus("pageTshowMode");
     },
     isShowSlotB() {
-      return this.getShowStatus('pageBshowMode')
-    }
+      return this.getShowStatus("pageBshowMode");
+    },
   },
   methods: {
     getShowStatus(prop) {
-      const { htmlModules } = this.$themeConfig
-      if (!htmlModules) return false
-      if (htmlModules[prop] === 'article') { // 仅文章页显示
-        return this.isArticle()
-      } else if (htmlModules[prop] === 'custom') { // 仅自定义页显示
-        return !(this.isArticle())
-      } else { // 全部显示
-        return true
+      const { htmlModules } = this.$themeConfig;
+      if (!htmlModules) return false;
+      if (htmlModules[prop] === "article") {
+        // 仅文章页显示
+        return this.isArticle();
+      } else if (htmlModules[prop] === "custom") {
+        // 仅自定义页显示
+        return !this.isArticle();
+      } else {
+        // 全部显示
+        return true;
       }
     },
     isArticle() {
-      return this.$frontmatter.article !== false
-    }
-  }
-}
+      return this.$frontmatter.article !== false;
+    },
+    confirmLock() {
+      console.log(this.lockValue);
+      if (this.lockValue === this.$frontmatter.lock) {
+        this.isLoack = false;
+        this.showVerify = false;
+      } else {
+        this.showVerify = true;
+      }
+    },
+  },
+};
 </script>
 
 <style lang="stylus">
@@ -204,4 +225,11 @@ export default {
   @media (min-width 1280px)
     .sidebar, .sidebar-button
       display none
+
+.lock
+  display block
+
+  background-color white
+  width 100%
+  height 100%
 </style>
