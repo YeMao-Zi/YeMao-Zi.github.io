@@ -255,29 +255,20 @@ export default defineConfig4CustomTheme<blogConfig>({
     //   },
     // ],
     // 全文搜索
-    "fulltext-search",// 此插件会在打开网站时多加载部分js文件用于搜索，导致初次访问网站变慢。如在意初次访问速度的话可以不使用此插件！
+    // "fulltext-search",// 此插件会在打开网站时多加载部分js文件用于搜索，导致初次访问网站变慢。如在意初次访问速度的话可以不使用此插件！
 
     // 可以添加第三方搜索链接的搜索框（继承原官方搜索框的配置参数,只能在服务器环境，githubPages中会报错）
-    // [
-    //   "thirdparty-search",
-    //   {
-    //     thirdparty: [
-    //       {
-    //         title: "在MDN中搜索",
-    //         frontUrl: "https://developer.mozilla.org/zh-CN/search?q=", // 搜索链接的前面部分
-    //         behindUrl: "", // 搜索链接的后面部分，可选，默认 ''
-    //       },
-    //       {
-    //         title: "在Runoob中搜索",
-    //         frontUrl: "https://www.runoob.com/?s=",
-    //       },
-    //       {
-    //         title: "在Bing中搜索",
-    //         frontUrl: "https://cn.bing.com/search?q=",
-    //       }
-    //     ],
-    //   },
-    // ],
+    [
+      "thirdparty-search",
+      {
+        thirdparty: [
+          {
+            title: "在Bing中搜索",
+            frontUrl: "https://cn.bing.com/search?q=",
+          },
+        ],
+      },
+    ],
 
     [
       "one-click-copy", // 代码块复制按钮
@@ -316,45 +307,47 @@ export default defineConfig4CustomTheme<blogConfig>({
     [
       "vuepress-plugin-comment", // 评论
       // (我调试的时候之前好了一段时间，后来githubPages就报错了,在服务器端是没问题的,应该是域名问题,可以自己捣鼓捣鼓,如果嫌麻烦可以直接用三方的)
-      // {
-      //   choosen: "gitalk",
-      //   options: {
-      //     clientID: "5e6eceb12d05bdb71cda",
-      //     clientSecret: "a2f7fa11553dcda70f0f92617ce4eda04a4ee281",
-      //     repo: "blog-gitalk-comment", // GitHub 仓库
-      //     owner: "yemao-zi", // GitHub仓库所有者
-      //     admin: ["yemao-zi"], // 对仓库有写权限的人
-      //     // distractionFreeMode: true,
-      //     pagerDirection: "last", // 'first'正序 | 'last'倒序
-      //     id: "<%- (frontmatter.permalink || frontmatter.to.path).slice(-16) %>", //  页面的唯一标识,长度不能超过50
-      //     title: "「评论」<%- frontmatter.title %>", // GitHub issue 的标题
-      //     labels: ["Gitalk", "Comment"], // GitHub issue 的标签
-      //     body: "页面：<%- window.location.origin + (frontmatter.to.path || window.location.pathname) %>", // GitHub issue 的内容
-      //   },
-      // },
       {
-        choosen: "valine",
+        choosen: "gitalk",
         options: {
-          appId: "uYYVXeOP6qFlqnxydyT45TO4-gzGzoHsz",
-          appKey: "FOgEh8WLa29SzAZLHztXCsU5",
+          clientID: "5e6eceb12d05bdb71cda",
+          clientSecret: "a2f7fa11553dcda70f0f92617ce4eda04a4ee281",
+          repo: "blog-gitalk-comment", // GitHub 仓库
+          owner: "yemao-zi", // GitHub仓库所有者
+          admin: ["yemao-zi"], // 对仓库有写权限的人
           // distractionFreeMode: true,
           pagerDirection: "last", // 'first'正序 | 'last'倒序
-          path: "<%- (frontmatter.permalink || frontmatter.to.path).slice(-16) %>", //  页面的唯一标识
+          id: "<%- (frontmatter.permalink || frontmatter.to.path).slice(-16) %>", //  页面的唯一标识,长度不能超过50
+          title: "「评论」<%- frontmatter.title %>", // GitHub issue 的标题
+          labels: ["Gitalk", "Comment"], // GitHub issue 的标签
+          body: "页面：<%- window.location.origin + (frontmatter.to.path || window.location.pathname) %>", // GitHub issue 的内容
         },
       },
-    ],
-    [
-      "@vuepress/last-updated", // "上次更新"时间格式
-      {
-        transformer: (timestamp, lang) => {
-          return dayjs(timestamp).format("YYYY/MM/DD, HH:mm:ss");
+      //   {
+      //     choosen: "valine",
+      //     options: {
+      //       appId: "uYYVXeOP6qFlqnxydyT45TO4-gzGzoHsz",
+      //       appKey: "FOgEh8WLa29SzAZLHztXCsU5",
+      //       // distractionFreeMode: true,
+      //       pagerDirection: "last", // 'first'正序 | 'last'倒序
+      //       path: "<%- (frontmatter.permalink || frontmatter.to.path).slice(-16) %>", //  页面的唯一标识
+      //     },
+      //   },
+      // ],
+      [
+        "@vuepress/last-updated", // "上次更新"时间格式
+        {
+          transformer: (timestamp, lang) => {
+            return dayjs(timestamp).format("YYYY/MM/DD, HH:mm:ss");
+          },
         },
-      },
+      ],
     ],
   ],
 
   markdown: {
     lineNumbers: true,
+    // extractHeaders: ['h2', 'h3', 'h4', 'h5', 'h6'], // 提取标题到侧边栏的级别，默认['h2', 'h3']
   },
 
   // 监听文件变化并重新构建
