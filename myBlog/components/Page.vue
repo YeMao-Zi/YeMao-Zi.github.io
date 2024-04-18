@@ -34,10 +34,8 @@
     </main>
     <div v-else class="page">
       <div>
-        <label for="lock">Lock:</label>
-        <input id="lock" name="lock" type="text" placeholder="请输入页面密码" v-model="lockValue" />
+        <input id="lock" name="lock" type="text" v-model="lockValue" />
         <button @click="confirmLock">确定</button>
-        <span style="color: red;" v-show="showVerify">密码错误</span>
       </div>
     </div>
   </div>
@@ -60,13 +58,11 @@ export default {
       updateBarConfig: null,
       isLoack: false,
       lockValue: "",
-      showVerify: false,
     };
   },
   props: ["sidebarItems"],
   components: { PageEdit, PageNav, ArticleInfo, Catalogue, UpdateArticle, RightMenu },
   created() {
-    console.log(this.$frontmatter, "frontmatter");
     this.updateBarConfig = this.$themeConfig.updateBar;
     if (this.$frontmatter.lock) {
       this.isLoack = true;
@@ -121,12 +117,8 @@ export default {
       return this.$frontmatter.article !== false;
     },
     confirmLock() {
-      console.log(this.lockValue);
       if (this.lockValue === this.$frontmatter.lock) {
         this.isLoack = false;
-        this.showVerify = false;
-      } else {
-        this.showVerify = true;
       }
     },
   },
