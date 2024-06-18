@@ -306,7 +306,6 @@ export default defineConfig4CustomTheme<blogConfig>({
     ],
     [
       "vuepress-plugin-comment", // 评论
-      // (我调试的时候之前好了一段时间，后来githubPages就报错了,在服务器端是没问题的,应该是域名问题,可以自己捣鼓捣鼓,如果嫌麻烦可以直接用三方的)
       {
         choosen: "gitalk",
         options: {
