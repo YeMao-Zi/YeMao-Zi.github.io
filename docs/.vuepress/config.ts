@@ -68,11 +68,11 @@ export default defineConfig4CustomTheme<blogConfig>({
               },
             ],
           },
-          {
-            text: "全栈项目",
-            link: "/web/webserver/",
-            // items: [{ text: "时间管理", link: "/note/webserver/" }],
-          },
+          // {
+          //   text: "全栈项目",
+          //   link: "/web/webserver/",
+          //   items: [{ text: "时间管理", link: "/note/webserver/" }],
+          // },
         ],
       },
       {
