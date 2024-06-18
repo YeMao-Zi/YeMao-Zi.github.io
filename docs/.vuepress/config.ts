@@ -68,14 +68,20 @@ export default defineConfig4CustomTheme<blogConfig>({
               },
             ],
           },
-          // {
-          //   text: "前端架构",
-          //   items: [{ text: "微前端", link: "/pages/micopreface/" }],
-          // },
-          // {
-          //   text: "全栈项目",
-          //   items: [{ text: "时间管理", link: "/note/todolistpreface/" }],
-          // },
+          {
+            text: "《前端架构》",
+            items: [
+              { text: "《微前端》", link: "/note/micopreface/" },
+              {
+                text: "《权限控制》",
+                link: "/note/webpermission/",
+              },
+            ],
+          },
+          {
+            text: "全栈项目",
+            items: [{ text: "任务管理日历", link: "/note/todolistserver/" }],
+          },
         ],
       },
       {
