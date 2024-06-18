@@ -68,14 +68,14 @@ export default defineConfig4CustomTheme<blogConfig>({
               },
             ],
           },
-          {
-            text: "前端架构",
-            items: [{ text: "微前端", link: "/pages/micopreface/" }],
-          },
-          {
-            text: "全栈项目",
-            items: [{ text: "时间管理", link: "/note/todolistpreface/" }],
-          },
+          // {
+          //   text: "前端架构",
+          //   items: [{ text: "微前端", link: "/pages/micopreface/" }],
+          // },
+          // {
+          //   text: "全栈项目",
+          //   items: [{ text: "时间管理", link: "/note/todolistpreface/" }],
+          // },
         ],
       },
       {
