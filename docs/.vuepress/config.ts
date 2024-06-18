@@ -70,7 +70,7 @@ export default defineConfig4CustomTheme<blogConfig>({
           },
           {
             text: "全栈项目",
-            items: [{ text: "时间管理", link: "/note/webServer/" }],
+            items: [{ text: "时间管理", link: "/note/webserver/" }],
           },
         ],
       },
