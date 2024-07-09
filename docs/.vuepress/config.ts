@@ -80,7 +80,10 @@ export default defineConfig4CustomTheme<blogConfig>({
           },
           {
             text: "全栈项目",
-            items: [{ text: "任务管理日历", link: "/note/todolistserver/" }],
+            items: [
+              { text: "任务管理日历", link: "/note/todolistserver/" },
+              { text: "无代码平台", link: "/note/mallbook/" },
+            ],
           },
         ],
       },
