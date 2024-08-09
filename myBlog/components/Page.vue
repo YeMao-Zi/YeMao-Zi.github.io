@@ -220,7 +220,6 @@ export default {
 
 .lock
   display block
-
   background-color white
   width 100%
   height 100%
