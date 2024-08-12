@@ -1,5 +1,5 @@
 <template>
-  <header v-show="showHeader" class="navbar blur">
+  <header class="navbar blur">
     <SidebarButton @toggle-sidebar="$emit('toggle-sidebar')" />
 
     <router-link :to="$localePath" class="home-link">
@@ -73,10 +73,6 @@ export default {
   computed: {
     algolia() {
       return this.$themeLocaleConfig.algolia || this.$site.themeConfig.algolia || {};
-    },
-    showHeader() {
-      const { header = true } = this.$frontmatter;
-      return header;
     },
     isAlgoliaSearch() {
       return this.algolia && this.algolia.apiKey && this.algolia.indexName;
