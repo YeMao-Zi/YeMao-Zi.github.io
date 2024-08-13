@@ -121,6 +121,20 @@ export default {
         this.isLoack = false;
       }
     },
+    shouldShowNavbar() {
+      const { themeConfig } = this.$site;
+      const { frontmatter } = this.$page;
+      if (frontmatter.navbar === false || themeConfig.navbar === false) {
+        return false;
+      }
+      return (
+        this.$title ||
+        themeConfig.logo ||
+        themeConfig.repo ||
+        themeConfig.nav ||
+        this.$themeLocaleConfig.nav
+      );
+    },
   },
 };
 </script>
