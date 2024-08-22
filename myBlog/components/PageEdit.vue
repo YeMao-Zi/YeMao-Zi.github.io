@@ -52,7 +52,6 @@ export default {
         : this.$page.frontmatter.editLink;
 
       const { repo, docsDir = "", docsBranch = "master", docsRepo = repo } = this.$site.themeConfig;
-      console.log(this.$site.themeConfig, this.$page);
       if (showEditLink && docsRepo && this.$page.relativePath) {
         return this.createEditLink(repo, docsRepo, docsDir, docsBranch, this.$page.relativePath);
       }
