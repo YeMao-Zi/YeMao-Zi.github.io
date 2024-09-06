@@ -35,6 +35,7 @@ export default defineConfig4CustomTheme<blogConfig>({
             text: "学习笔记",
             items: [
               { text: "《JavaScript教程》", link: "/note/javascript/" },
+              { text: "《Web Api》", link: "/note/webapi/" },
               { text: "《ES6教程》", link: "/note/es6/" },
               { text: "《Vue》", link: "/note/vue/" },
               { text: "《React》", link: "/note/react/" },
