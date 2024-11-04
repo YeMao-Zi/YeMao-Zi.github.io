@@ -1,6 +1,6 @@
 <template>
   <div>
-    <main v-if="!isLoack" class="page">
+    <main class="page">
       <div :class="`theme-wrapper ${bgStyle}`">
         <ArticleInfo v-if="isArticle()" />
         <component class="theme-content" v-if="pageComponent" :is="pageComponent" />
@@ -32,12 +32,6 @@
         v-if="isShowUpdateBar"
       />
     </main>
-    <div v-else class="page">
-      <div>
-        <input id="lock" name="lock" type="text" v-model="lockValue" />
-        <button @click="confirmLock">确定</button>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -56,17 +50,12 @@ export default {
   data() {
     return {
       updateBarConfig: null,
-      isLoack: false,
-      lockValue: "",
     };
   },
   props: ["sidebarItems"],
   components: { PageEdit, PageNav, ArticleInfo, Catalogue, UpdateArticle, RightMenu },
   created() {
     this.updateBarConfig = this.$themeConfig.updateBar;
-    if (this.$frontmatter.lock) {
-      this.isLoack = true;
-    }
   },
   computed: {
     bgStyle() {
@@ -115,11 +104,6 @@ export default {
     },
     isArticle() {
       return this.$frontmatter.article !== false;
-    },
-    confirmLock() {
-      if (this.lockValue === this.$frontmatter.lock) {
-        this.isLoack = false;
-      }
     },
     shouldShowNavbar() {
       const { themeConfig } = this.$site;
