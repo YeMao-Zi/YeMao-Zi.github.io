@@ -1,6 +1,6 @@
 import { resolve } from "path";
 import { defineConfig4CustomTheme, UserPlugins } from "vuepress/config";
-import { blogConfig } from "../../myBlog/types/index";
+import type { blogConfig } from "../../myBlog/types/index";
 import dayjs from "dayjs";
 // import baiduCode from "./config/baiduCode"; // 百度统计hm码
 // import htmlModules from "./config/htmlModules"; // 自定义插入的html块
@@ -60,10 +60,6 @@ export default defineConfig4CustomTheme<blogConfig>({
                 link: "/note/electron/",
               },
               {
-                text: "《Node》",
-                link: "/note/node/",
-              },
-              {
                 text: "JS设计模式总结",
                 link: "/pages/4643cd/",
               },
@@ -97,12 +93,19 @@ export default defineConfig4CustomTheme<blogConfig>({
         ],
       },
       {
+        text: "服务端",
+        link: "/server/",
+        items: [
+          { text: "Nodejs", link: "/pages/117708e0af7f0bd9/" },
+          { text: "MySql", link: "/pages/sqlgrammar/" },
+        ],
+      },
+      {
         text: "技术",
         link: "/technology/",
         items: [
           { text: "技术文档", link: "/pages/9a7ee40fc232253e/" },
           { text: "GitHub技巧", link: "/pages/4c778760be26d8b3/" },
-          { text: "Nodejs", link: "/pages/117708e0af7f0bd9/" },
           { text: "博客搭建", link: "/pages/41f87d890d0a02af/" },
           { text: "Ajax", link: "/pages/e5ac77/" },
           { text: "Vite", link: "/pages/13aa70/" },
