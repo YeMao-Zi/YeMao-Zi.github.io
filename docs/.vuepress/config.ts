@@ -122,7 +122,7 @@ export default defineConfig4CustomTheme<blogConfig>({
           { text: "友情链接", link: "/friends/" },
         ],
       },
-      { text: "关于", link: "/about/" },
+      // { text: "关于", link: "/about/" },
       {
         text: "收藏",
         link: "/pages/beb6c0bd8a66cea6/",
