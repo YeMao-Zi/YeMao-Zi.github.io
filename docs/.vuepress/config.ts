@@ -2,7 +2,6 @@ import { resolve } from "path";
 import { defineConfig4CustomTheme, UserPlugins } from "vuepress/config";
 import type { blogConfig } from "../../myBlog/types/index";
 import dayjs from "dayjs";
-// import baiduCode from "./config/baiduCode"; // 百度统计hm码
 // import htmlModules from "./config/htmlModules"; // 自定义插入的html块
 
 export default defineConfig4CustomTheme<blogConfig>({
@@ -234,6 +233,10 @@ export default defineConfig4CustomTheme<blogConfig>({
 
   // 注入到页面<head>中的标签，格式[tagName, { attrName: attrValue }, innerHTML?]
   head: [
+    ["script", { src: "https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js" }],
+    ["script", { src: "https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js" }],
+    ["script", { src: "https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js" }],
+    ["script", { src: "https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js" }],
     ["link", { rel: "icon", href: "/img/heimaoio.webp" }], //favicons，资源放在public文件夹
     [
       "meta",
@@ -243,38 +246,14 @@ export default defineConfig4CustomTheme<blogConfig>({
           "前端博客,个人技术博客,前端,前端开发,前端框架,web前端,前端面试题,技术文档,学习,面试,JavaScript,js,ES6,TypeScript,vue,python,css3,html5,Node,git,github,markdown",
       },
     ],
-    // ['meta', { name: 'baidu-site-verification', content: '7F55weZDDc' }], // 百度统计的站长验证（你可以去掉）
     ["meta", { name: "theme-color", content: "#11a8cd" }], // 移动浏览器主题颜色
-    // [
-    //   'script',
-    //   {
-    //     'data-ad-client': 'ca-pub-7828333725993554',
-    //     async: 'async',
-    //     src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
-    //   },
-    // ], // 网站关联Google AdSense 与 html格式广告支持（你可以去掉）
   ],
 
   // 插件配置
   plugins: <UserPlugins>[
-    // [
-    //   "sitemap", // 网站地图
-    //   {
-    //     hostname: 'https://yemao-zi.github.io',
-    //   },
-    // ],
-    // "vuepress-plugin-baidu-autopush", // 百度自动推送
-
-    // [
-    //   "vuepress-plugin-baidu-tongji", // 百度统计
-    //   {
-    //     hm: baiduCode,
-    //   },
-    // ],
     // 全文搜索
     // "fulltext-search",// 此插件会在打开网站时多加载部分js文件用于搜索，导致初次访问网站变慢。如在意初次访问速度的话可以不使用此插件！
-
-    // 可以添加第三方搜索链接的搜索框（继承原官方搜索框的配置参数,只能在服务器环境，githubPages中会报错）
+    // 可以添加第三方搜索链接的搜索框
     [
       "thirdparty-search",
       {
@@ -286,7 +265,6 @@ export default defineConfig4CustomTheme<blogConfig>({
         ],
       },
     ],
-
     [
       "one-click-copy", // 代码块复制按钮
       {
@@ -296,16 +274,10 @@ export default defineConfig4CustomTheme<blogConfig>({
         showInMobile: false, // whether to display on the mobile side, default: false.
       },
     ],
-
     [
       "demo-block", // demo演示模块
       {
         settings: {
-          // jsLib: ['http://xxx'], // 在线示例(jsfiddle, codepen)中的js依赖
-          // cssLib: ['http://xxx'], // 在线示例中的css依赖
-          // vue: "https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js", // 在线示例中的vue依赖
-          // react: "https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js", // 在线示例中的react依赖
-          // reactDOM: "https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js", // 在线示例中的reactDOM依赖
           jsfiddle: false, // 是否显示 jsfiddle 链接
           codepen: true, // 是否显示 codepen 链接
           horizontal: false, // 是否展示为横向样式
