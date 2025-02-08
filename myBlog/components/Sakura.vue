@@ -75,7 +75,7 @@ export default {
     return {
       staticx: false,
       stop: null,
-      num: 10,
+      num: 20,
       show: true,
       zIndex: 0,
     };

@@ -186,7 +186,6 @@ export function ballBoom() {
     "width: 100%; height: 100%; top: 0; left: 0; z-index: 99999; position: fixed; pointer-events: none;"
   );
   const pointer = document.createElement("span");
-  pointer.classList.add("pointer");
   document.body.appendChild(pointer);
 
   if (canvas.getContext && window.addEventListener) {
@@ -202,9 +201,7 @@ export function ballBoom() {
       function (e) {
         mousedownFun.run(() => {
           pushBalls(randBetween(5, 10), e.clientX, e.clientY);
-          document.body.classList.add("is-pressed");
           longPress = setTimeout(function () {
-            document.body.classList.add("is-longpress");
             longPressed = true;
           }, 500);
         });
@@ -219,7 +216,6 @@ export function ballBoom() {
         mouseupFun.run(() => {
           clearInterval(longPress);
           if (longPressed == true) {
-            document.body.classList.remove("is-longpress");
             pushBalls(
               randBetween(50 + Math.ceil(multiplier), 100 + Math.ceil(multiplier)),
               e.clientX,
@@ -227,7 +223,6 @@ export function ballBoom() {
             );
             longPressed = false;
           }
-          document.body.classList.remove("is-pressed");
         });
       },
       false
