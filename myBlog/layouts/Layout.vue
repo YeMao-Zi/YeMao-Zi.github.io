@@ -86,6 +86,7 @@ import Buttons from "@theme/components/Buttons.vue";
 import Footer from "@theme/components/Footer";
 import BodyBgImg from "@theme/components/BodyBgImg";
 import { resolveSidebarItems } from "../util";
+import { clickParticle, ballBoom } from "../util/mouseAnimation";
 import storage from "good-storage"; // 本地存储
 import _ from "lodash";
 
@@ -256,6 +257,10 @@ export default {
         }
       }, 300)
     );
+
+    // 鼠标交互效果
+    ballBoom()
+    // clickParticle();
   },
   watch: {
     isSidebarOpen() {
