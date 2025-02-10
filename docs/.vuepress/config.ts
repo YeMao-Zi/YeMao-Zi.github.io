@@ -141,7 +141,7 @@ export default defineConfig4CustomTheme<blogConfig>({
         ],
       },
     ],
-    sidebarDepth: 2, // 侧边栏显示深度，默认1，最大2（显示到h3标题）
+    sidebarDepth: 3, // 侧边栏显示深度，默认1，最大2（显示到h3标题）
     logo: "/img/heimaoio.webp", // 导航栏logo
     repo: "yemao-zi", // 导航栏右侧生成Github链接
     searchMaxSuggestions: 10, // 搜索结果显示最大数
@@ -335,7 +335,7 @@ export default defineConfig4CustomTheme<blogConfig>({
 
   markdown: {
     lineNumbers: true,
-    // extractHeaders: ['h2', 'h3', 'h4', 'h5', 'h6'], // 提取标题到侧边栏的级别，默认['h2', 'h3']
+    extractHeaders: ["h2", "h3", "h4"], // 提取标题到侧边栏的级别，默认['h2', 'h3']
   },
 
   // 监听文件变化并重新构建
