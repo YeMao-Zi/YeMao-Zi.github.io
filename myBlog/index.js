@@ -87,7 +87,7 @@ module.exports = (options, ctx) => {
       ["smooth-scroll", enableSmoothScroll],
 
       [
-        "container",
+        "vuepress-plugin-container",
         {
           type: "note",
           defaultTitle: {
@@ -97,7 +97,7 @@ module.exports = (options, ctx) => {
         },
       ],
       [
-        "container",
+        "vuepress-plugin-container",
         {
           type: "tip",
           defaultTitle: {
@@ -107,7 +107,7 @@ module.exports = (options, ctx) => {
         },
       ],
       [
-        "container",
+        "vuepress-plugin-container",
         {
           type: "warning",
           defaultTitle: {
@@ -117,7 +117,7 @@ module.exports = (options, ctx) => {
         },
       ],
       [
-        "container",
+        "vuepress-plugin-container",
         {
           type: "danger",
           defaultTitle: {
@@ -127,14 +127,23 @@ module.exports = (options, ctx) => {
         },
       ],
       [
-        "container",
+        "vuepress-plugin-container",
         {
           type: "right",
           defaultTitle: "",
         },
       ],
+      // 内容居中容器
       [
         "container",
+        {
+          type: "center",
+          before: (info) => `<div class="center-container">`,
+          after: () => "</div>",
+        },
+      ],
+      [
+        "vuepress-plugin-container",
         {
           type: "theorem",
           before: (info) => `<div class="custom-block theorem"><p class="title">${info}</p>`,
@@ -142,7 +151,7 @@ module.exports = (options, ctx) => {
         },
       ],
       [
-        "container",
+        "vuepress-plugin-container",
         {
           type: "details",
           before: (info) =>
@@ -154,20 +163,9 @@ module.exports = (options, ctx) => {
           },
         },
       ],
-
-      // 内容居中容器
-      [
-        "container",
-        {
-          type: "center",
-          before: (info) => `<div class="center-container">`,
-          after: () => "</div>",
-        },
-      ],
-
       // 卡片列表
       [
-        "container",
+        "vuepress-plugin-container",
         {
           type: CARD_LIST,
           render: (tokens, idx) => {
@@ -184,7 +182,7 @@ module.exports = (options, ctx) => {
 
       // 图文卡片列表
       [
-        "container",
+        "vuepress-plugin-container",
         {
           type: CARD_IMG_LIST,
           render: (tokens, idx) => {
@@ -270,7 +268,7 @@ function getCardListDOM(dataList, row, config) {
   dataList.forEach((item) => {
     listDOM += `
       <${
-        item.link ? 'a href="' + item.link + '" target="' + target + '"' : "span"
+        item.link ? 'a href="' + withBase(item.link) + '" target="' + target + '"' : "span"
       } class="card-item ${row ? "row-" + row : ""}"
          style="${
            item.bgColor
@@ -297,7 +295,7 @@ function getCardImgListDOM(dataList, row, config) {
   dataList.forEach((item) => {
     listDOM += `
       <div class="card-item ${row ? "row-" + row : ""}" >
-        <a href="${item.link}" target="${target}">
+        <a href="${withBase(item.link)}" target="${target}">
           <div class="box-img" style="height: ${imgHeight}">
               <img src="${withBase(item.img)}" class="no-zoom" style="object-fit: ${objectFit}">
           </div>

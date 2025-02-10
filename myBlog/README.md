@@ -37,7 +37,7 @@ blog for vuepress
 // config.js
 module.exports = {
   themeConfig: {
-     sidebar: 'structuring' //  'structuring' | { mode: 'structuring', collapsable: Boolean} | 'auto' | 自定义
+     sidebar: 'structuring' //  'structuring' | { mode: 'structuring', collapsable: Boolean } | 'auto' | 自定义
   }
 }
 
@@ -86,7 +86,6 @@ module.exports = {
 ```
 
 ## front matter
-
 
 front matter 用于标识当前文件信息（如：类型，标题，作者，时间，分类，文字链接，唯一标识符，标签等等），主题会处理这些信息生成对应的结构或样式。
 
@@ -204,6 +203,5 @@ pageComponent: # 使用页面组件
 图片尺寸在页面中显示为80px*80px
 
 
-
-## [markdown技巧](https://yemao-zi.github.io/pages/7683ce/#%E6%B7%BB%E5%8A%A0%E6%91%98%E8%A6%81)
+## [更多技巧](https://yemao-zi.github.io/pages/7683ce/#%E6%B7%BB%E5%8A%A0%E6%91%98%E8%A6%81)
 

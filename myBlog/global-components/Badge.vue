@@ -9,7 +9,7 @@ export default {
     text: String,
     vertical: {
       type: String,
-      default: 'top'
+      default: 'unset'
     }
   },
   render (h, { props, slots }) {
