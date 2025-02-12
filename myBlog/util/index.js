@@ -292,8 +292,9 @@ export class AnimationDebounce {
     if (this.ticking) return;
     this.ticking = true;
     requestAnimationFrame(() => {
-      callback();
+      callback?.();
       this.ticking = false;
     });
   }
 }
+
