@@ -2,17 +2,14 @@
   <div class="custom-page archives-page">
     <div class="theme-wrapper">
       <h1>
-        <img
-          :src="currentBadge"
-          v-if="$themeConfig.titleBadge === false ? false : true"
-        />
+        <img :src="currentBadge" v-if="$themeConfig.titleBadge === false ? false : true" />
         {{ $page.title }}
       </h1>
       <div class="count">
         总共 <i>{{ $sortPostsByDate.length }}</i> 篇文章
       </div>
       <ul>
-        <template v-for="(item, index) in postsList">
+        <template v-for="(item, index) in postsList" :key="index">
           <li
             class="year"
             v-if="(year = getYear(index)) !== getYear(index - 1)"
@@ -25,7 +22,7 @@
               </span>
             </h2>
           </li>
-          <li :key="index">
+          <li>
             <router-link :to="item.path">
               <span class="date">{{ getDate(item) }}</span>
               {{ item.title }}
@@ -41,9 +38,9 @@
 </template>
 
 <script>
-import debounce from 'lodash.debounce'
-import { type } from '../util'
-import TitleBadgeMixin from '../mixins/titleBadge'
+import debounce from "lodash.debounce";
+import { type } from "../util";
+import TitleBadgeMixin from "../mixins/titleBadge";
 
 export default {
   mixins: [TitleBadgeMixin],
@@ -53,74 +50,83 @@ export default {
       countByYear: {}, // 根据年份统计的文章数
 
       perPage: 80, // 每页长
-      currentPage: 1// 当前页
-
-    }
+      currentPage: 1, // 当前页
+    };
   },
   created() {
-    this.getPageData()
+    this.getPageData();
 
     // 根据年份计算出文章数
-    const { $sortPostsByDate, countByYear } = this
+    const { $sortPostsByDate, countByYear } = this;
     for (let i = 0; i < $sortPostsByDate.length; i++) {
-      const { frontmatter: { date } } = $sortPostsByDate[i];
-      if (date && type(date) === 'string') {
-        const year = date.slice(0, 4)
+      const {
+        frontmatter: { date },
+      } = $sortPostsByDate[i];
+      if (date && type(date) === "string") {
+        const year = date.slice(0, 4);
         if (!countByYear[year]) {
-          countByYear[year] = 0
+          countByYear[year] = 0;
         }
-        countByYear[year] = countByYear[year] + 1
+        countByYear[year] = countByYear[year] + 1;
       }
     }
-    this.countByYear = countByYear
+    this.countByYear = countByYear;
   },
   mounted() {
-    window.addEventListener('scroll', debounce(() => {
-      if (this.postsList.length < this.$sortPostsByDate.length) {
-        const docEl = document.documentElement
-        const docBody = document.body
-        const scrollTop = docEl.scrollTop || docBody.scrollTop;
-        const clientHeight = docEl.clientHeight || docBody.clientHeight;
-        const scrollHeight = docEl.scrollHeight || docBody.scrollHeight;
+    window.addEventListener(
+      "scroll",
+      debounce(() => {
+        if (this.postsList.length < this.$sortPostsByDate.length) {
+          const docEl = document.documentElement;
+          const docBody = document.body;
+          const scrollTop = docEl.scrollTop || docBody.scrollTop;
+          const clientHeight = docEl.clientHeight || docBody.clientHeight;
+          const scrollHeight = docEl.scrollHeight || docBody.scrollHeight;
 
-        if (scrollHeight > clientHeight && scrollTop + clientHeight >= scrollHeight - 250) {
-          this.loadmore()
+          if (scrollHeight > clientHeight && scrollTop + clientHeight >= scrollHeight - 250) {
+            this.loadmore();
+          }
         }
-      }
-
-    }, 200))
+      }, 200)
+    );
   },
   methods: {
     getPageData() {
-      const currentPage = this.currentPage
-      const perPage = this.perPage
-      this.postsList = this.postsList.concat(this.$sortPostsByDate.slice((currentPage - 1) * perPage, currentPage * perPage))
+      const currentPage = this.currentPage;
+      const perPage = this.perPage;
+      this.postsList = this.postsList.concat(
+        this.$sortPostsByDate.slice((currentPage - 1) * perPage, currentPage * perPage)
+      );
     },
     loadmore() {
-      this.currentPage = this.currentPage + 1
-      this.getPageData()
+      this.currentPage = this.currentPage + 1;
+      this.getPageData();
     },
     getYear(index) {
-      const item = this.postsList[index]
+      const item = this.postsList[index];
       if (!item) {
-        return
+        return;
       }
-      const { frontmatter: { date } } = item
-      if (date && type(date) === 'string') {
-        return date.slice(0, 4)
+      const {
+        frontmatter: { date },
+      } = item;
+      if (date && type(date) === "string") {
+        return date.slice(0, 4);
       }
     },
     getDate(item) {
-      const { frontmatter: { date } } = item
-      if (date && type(date) === 'string') {
-        return date.slice(5, 10)
+      const {
+        frontmatter: { date },
+      } = item;
+      if (date && type(date) === "string") {
+        return date.slice(5, 10);
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
-<style lang='stylus'>
+<style lang="stylus">
 @require '../styles/wrapper.styl'
 
 .archives-page
