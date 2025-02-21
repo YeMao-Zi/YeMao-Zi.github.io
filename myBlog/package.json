@@ -31,7 +31,8 @@
     "json2yaml": "^1.1.0",
     "lodash": "^4.17.15",
     "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2"
+    "stylus-loader": "^3.0.2",
+    "vuepress-plugin-mermaidjs": "^1.9.1"
   },
   "devDependencies": {
     "@vuepress/types": "^1.9.5"

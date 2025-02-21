@@ -85,7 +85,7 @@ module.exports = (options, ctx) => {
       "@vuepress/search",
       "@vuepress/plugin-nprogress",
       ["smooth-scroll", enableSmoothScroll],
-
+      ["vuepress-plugin-mermaidjs", { gantt: { barHeight: 40 } }],
       [
         "vuepress-plugin-container",
         {
