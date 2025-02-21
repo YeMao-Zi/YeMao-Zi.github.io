@@ -1,6 +1,10 @@
 {
   "name": "vuepress-blog",
+  "private": true,
   "version": "1.0.0",
+  "workspaces": [
+    "myBlog"
+  ],
   "scripts": {
     "dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
