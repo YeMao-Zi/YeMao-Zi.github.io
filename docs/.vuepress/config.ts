@@ -95,8 +95,11 @@ export default defineConfig4CustomTheme<blogConfig>({
         text: "服务端",
         link: "/server/",
         items: [
-          { text: "Nodejs", link: "/pages/117708e0af7f0bd9/" },
+          { text: "Nodejs", link: "/pages/82ce0c/" },
+          { text: "Midway", link: "/pages/bba379/" },
+          { text: "Nest", link: "/pages/nestkpc/" },
           { text: "MySql", link: "/pages/sqlgrammar/" },
+          { text: "其他", link: "/pages/sjjgysf/" },
         ],
       },
       {
