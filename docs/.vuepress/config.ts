@@ -72,6 +72,7 @@ export default defineConfig4CustomTheme<blogConfig>({
                 text: "《权限控制》",
                 link: "/note/webpermission/",
               },
+              { text: "monorepo", link: "/pages/47f4ae/" },
             ],
           },
           {
@@ -79,6 +80,7 @@ export default defineConfig4CustomTheme<blogConfig>({
             items: [
               { text: "任务管理日历", link: "/note/todolistserver/" },
               { text: "无代码平台", link: "/note/mallbook/" },
+              { text: "图书管理系统", link: "/note/nesttsfx/" },
             ],
           },
         ],
@@ -111,6 +113,10 @@ export default defineConfig4CustomTheme<blogConfig>({
           { text: "博客搭建", link: "/pages/41f87d890d0a02af/" },
           { text: "Ajax", link: "/pages/e5ac77/" },
           { text: "Vite", link: "/pages/13aa70/" },
+          { text: "Vitest", link: "/pages/622646/" },
+          { text: "Nuxt", link: "/pages/77e451/" },
+          { text: "UI库文章", link: "/pages/iconify/" },
+          { text: "Docker", link: "/pages/70f42e/" },
         ],
       },
       {
