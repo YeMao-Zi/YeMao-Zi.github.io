@@ -80,7 +80,7 @@ export default defineConfig4CustomTheme<blogConfig>({
             items: [
               { text: "任务管理日历", link: "/note/todolistserver/" },
               { text: "无代码平台", link: "/note/mallbook/" },
-              { text: "图书管理系统", link: "/note/nesttsfx/" },
+              { text: "图书管理系统", link: "/note/tsglxt/" },
             ],
           },
         ],
