@@ -1,11 +1,11 @@
 import { resolve } from "path";
 import { defineConfig4CustomTheme, UserPlugins } from "vuepress/config";
-import type { blogConfig } from "../../myBlog/types/index";
+import type { blogConfig } from "../../ymblog/types/index";
 import dayjs from "dayjs";
 // import htmlModules from "./config/htmlModules"; // 自定义插入的html块
 
 export default defineConfig4CustomTheme<blogConfig>({
-  theme: resolve(__dirname, "../../myBlog"), // 使用本地主题
+  theme: resolve(__dirname, "../../ymblog"), // 使用本地主题
 
   locales: {
     "/": {

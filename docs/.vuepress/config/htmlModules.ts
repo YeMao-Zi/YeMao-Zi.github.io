@@ -1,4 +1,4 @@
-import type { blogConfig } from "../../../myBlog/types/index";
+import type { blogConfig } from "../../../ymblog/types/index";
 
 /** 插入自定义html模块 (可用于插入广告模块等)
  * {

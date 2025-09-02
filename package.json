@@ -1,9 +1,9 @@
 {
-  "name": "vuepress-blog",
+  "name": "vuepress-ymblog",
   "private": true,
   "version": "1.0.0",
   "workspaces": [
-    "myBlog"
+    "ymblog"
   ],
   "scripts": {
     "dev": "vuepress dev docs",
