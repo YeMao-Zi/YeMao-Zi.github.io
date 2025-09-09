@@ -13,49 +13,55 @@ jobs:
   build-and-deploy:
     name: Build and Deploy
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
         node-version: [20]
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-        
-      - name: Setup Node.js and pnpm
-        uses: pnpm/action-setup@v2
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
-          version: ${{ matrix.node-version }}
-          run_install: true
-          
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+
+      - name: Install pnpm
+        run: npm install -g pnpm@latest
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: Build project
         run: |
           export NODE_OPTIONS=--max_old_space_size=4096
           pnpm run build
-          
+
       - name: Get git metadata
         id: git-info
         run: |
           echo "COMMIT_INFO=$(git describe --all --always --long)" >> $GITHUB_OUTPUT
           echo "USER_NAME=$(git log -1 --pretty=format:'%an')" >> $GITHUB_OUTPUT
           echo "USER_EMAIL=$(git log -1 --pretty=format:'%ae')" >> $GITHUB_OUTPUT
-          
+
       - name: Deploy to GitHub Pages
         env:
           REMOTE_URL: ${{ github.server_url }}/${{ github.repository }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
           cd docs/.vuepress/dist
-          
+
           git init
           git config user.name "${{ steps.git-info.outputs.USER_NAME }}"
           git config user.email "${{ steps.git-info.outputs.USER_EMAIL }}"
           git config init.defaultBranch $DEPLOY_BRANCH
-          
+
           git add -A
           git commit -m "Auto deploy: ${{ steps.git-info.outputs.COMMIT_INFO }} [ci skip]"
-          
+
           git remote add origin https://${{ github.actor }}:$ACCESS_TOKEN@${REMOTE_URL#https://}
           git push origin HEAD:$DEPLOY_BRANCH --force
