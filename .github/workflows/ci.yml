@@ -32,6 +32,9 @@ jobs:
           version: 8
           run_install: false
 
+      - name: 安装 pnpm (保险)
+        run: npm install -g pnpm
+
       - name: Install dependencies
         run: pnpm install
 
