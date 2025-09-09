@@ -14,40 +14,17 @@ jobs:
     name: Build and Deploy
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [20]
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-          run_install: false
-
-      - name: Setup Node.js ${{ matrix.node-version }}
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: '20'
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_ENV
-          echo "store_path=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.pnpm-cache.outputs.store_path }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+      - name: Install pnpm
+        run: npm install -g pnpm@8
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
