@@ -1,19 +1,21 @@
-name: Deploy to GitHub Pages
+name: CI
 
+# 在master分支发生push事件时触发。
 on:
   push:
-    branches: [ master ]
-  workflow_dispatch: # 允许手动触发
+    branches:
+      - master
 
 env:
-  TZ: Asia/Shanghai
-  DEPLOY_BRANCH: gh-pages
+  TZ: Asia/Shanghai # 时区设置
+  DEPLOY_BRANCH: gh-pages # 部署分支
 
 jobs:
   build-and-deploy:
+    name: Build and Deploy
     runs-on: ubuntu-latest
-    timeout-minutes: 15 # 设置超时时间
 
+    # 设置 Node.js 版本矩阵
     strategy:
       matrix:
         node-version: [20]
@@ -28,56 +30,46 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm' # 启用 pnpm 缓存
+          cache: "pnpm" # 启用 pnpm 缓存
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: latest
           run_install: false
 
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_ENV
-
-      - name: Cache pnpm store
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Cache node_modules
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-
-
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --prefer-offline
+        run: pnpm install --frozen-lockfile
 
       - name: Build project
         run: |
-          export NODE_OPTIONS="--max_old_space_size=8192"
+          export NODE_OPTIONS=--max_old_space_size=8192
           pnpm run build
-        env:
-          NODE_ENV: production
 
-      - name: Setup Git
+      - name: Get git metadata
+        id: git-info
         run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global init.defaultBranch $DEPLOY_BRANCH
+          echo "COMMIT_INFO=$(git describe --all --always --long)" >> $GITHUB_OUTPUT
+          echo "USER_NAME=$(git log -1 --pretty=format:'%an')" >> $GITHUB_OUTPUT
+          echo "USER_EMAIL=$(git log -1 --pretty=format:'%ae')" >> $GITHUB_OUTPUT
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3 # 使用专门的部署 action
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }} # 使用内置 token，无需额外配置
-          publish_dir: ./docs/.vuepress/dist
-          force_orphan: true # 保持 gh-pages 分支的清洁
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
+        env:
+          REMOTE_URL: ${{ github.server_url }}/${{ github.repository }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        run: |
+          cd docs/.vuepress/dist
+
+          # 初始化 git 并配置
+          git init
+          git config user.name "${{ steps.git-info.outputs.USER_NAME }}"
+          git config user.email "${{ steps.git-info.outputs.USER_EMAIL }}"
+          git config init.defaultBranch $DEPLOY_BRANCH
+
+          # 添加文件并提交
+          git add -A
+          git commit -m "Auto deploy: ${{ steps.git-info.outputs.COMMIT_INFO }}"
+
+          # 推送到 gh-pages 分支
+          git remote add origin https://${{ github.actor }}:$ACCESS_TOKEN@${REMOTE_URL#https://}
+          git push origin HEAD:$DEPLOY_BRANCH --force
