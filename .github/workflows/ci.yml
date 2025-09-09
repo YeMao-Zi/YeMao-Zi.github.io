@@ -106,7 +106,7 @@ jobs:
           remote_addr=`git remote get-url --push origin`
           commit_info=`git describe --all --always --long`
           user_name=`git log -1 --pretty=format:'%an'`
-          user_email=`git log-1 --pretty=format:'%ae'`
+          user_email=`git log -1 --pretty=format:'%ae'`
           deploy_branch=gh-pages
           export NODE_OPTIONS=--max_old_space_size=8192
           pnpm build
