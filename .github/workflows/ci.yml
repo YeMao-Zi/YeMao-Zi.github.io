@@ -1,66 +1,54 @@
 name: CI
 
+#on: [push]
+
+# 在master分支发生push事件时触发。
 on:
   push:
     branches:
       - master
 
-env:
-  TZ: Asia/Shanghai
-  DEPLOY_BRANCH: gh-pages
+env: # 设置环境变量
+  TZ: Asia/Shanghai # 时区（设置时区可使页面中的`最近更新时间`使用该时区时间）
 
 jobs:
-  build-and-deploy:
-    name: Build and Deploy
-    runs-on: ubuntu-latest
+  build: # 自定义名称
+    runs-on: ubuntu-latest # 运行在虚拟机环境ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20]
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout # 步骤1
+        uses: actions/checkout@v1 # 使用的动作。格式：userName/repoName。作用：检出仓库，获取源码。 官方actions库：https://github.com/actions
+      - name: Use Node.js ${{ matrix.node-version }} # 步骤2
+        uses: actions/setup-node@v1 # 作用：安装nodejs
         with:
-          fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "pnpm"
-
+          node-version: ${{ matrix.node-version }} # 版本
       - name: 安装 pnpm
         run: npm install -g pnpm
-
-      - name: 检查 pnpm 版本
-        run: pnpm -v
 
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build project
+      - name: Build-and-deploy
         run: |
-          export NODE_OPTIONS=--max_old_space_size=8192
+          remote_addr=`git remote get-url --push origin`
+          commit_info=`git describe --all --always --long`
+          user_name=`git log -1 --pretty=format:'%an'`
+          user_email=`git log -1 --pretty=format:'%ae'`
+          deploy_branch=gh-pages
+          export NODE_OPTIONS=--max_old_space_size=4096
           pnpm run build
-
-      - name: Get git metadata
-        id: git-info
-        run: |
-          echo "COMMIT_INFO=$(git describe --all --always --long)" >> $GITHUB_OUTPUT
-          echo "USER_NAME=$(git log -1 --pretty=format:'%an')" >> $GITHUB_OUTPUT
-          echo "USER_EMAIL=$(git log -1 --pretty=format:'%ae')" >> $GITHUB_OUTPUT
-
-      - name: Deploy to GitHub Pages
-        env:
-          REMOTE_URL: ${{ github.server_url }}/${{ github.repository }}
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        run: |
           cd docs/.vuepress/dist
-
+          git config --global init.defaultBranch $deploy_branch
           git init
-          git config user.name "${{ steps.git-info.outputs.USER_NAME }}"
-          git config user.email "${{ steps.git-info.outputs.USER_EMAIL }}"
-          git config init.defaultBranch $DEPLOY_BRANCH
-
+          git config user.name ${user_name}
+          git config user.email ${user_email}
           git add -A
-          git commit -m "Auto deploy: ${{ steps.git-info.outputs.COMMIT_INFO }} [ci skip]"
-
-          git remote add origin https://${{ github.actor }}:$ACCESS_TOKEN@${REMOTE_URL#https://}
-          git push origin HEAD:$DEPLOY_BRANCH --force
+          git commit -m "auto deploy, $commit_info"
+          remote_addr=`echo $remote_addr | awk -F'://' '{print $2}'`
+          remote_addr=https://${user_name}:${{secrets.ACCESS_TOKEN}}@${remote_addr}
+          git remote add origin ${remote_addr}
+          git push origin HEAD:$deploy_branch --force
