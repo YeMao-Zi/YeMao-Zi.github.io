@@ -1,75 +1,61 @@
 name: CI
 
-# 在master分支发生push事件时触发。
 on:
   push:
     branches:
       - master
 
 env:
-  TZ: Asia/Shanghai # 时区设置
-  DEPLOY_BRANCH: gh-pages # 部署分支
+  TZ: Asia/Shanghai
+  DEPLOY_BRANCH: gh-pages
 
 jobs:
   build-and-deploy:
     name: Build and Deploy
     runs-on: ubuntu-latest
-
-    # 设置 Node.js 版本矩阵
+    
     strategy:
       matrix:
         node-version: [20]
-
+    
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4 # 升级到最新版本
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # 获取所有历史记录，用于 git describe
-
-      - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "pnpm" # 启用 pnpm 缓存
-
-      - name: Setup pnpm
+          fetch-depth: 0
+        
+      - name: Setup Node.js and pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: latest
-          run_install: false
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
+          version: ${{ matrix.node-version }}
+          run_install: true
+          
       - name: Build project
         run: |
-          export NODE_OPTIONS=--max_old_space_size=8192
+          export NODE_OPTIONS=--max_old_space_size=4096
           pnpm run build
-
+          
       - name: Get git metadata
         id: git-info
         run: |
           echo "COMMIT_INFO=$(git describe --all --always --long)" >> $GITHUB_OUTPUT
           echo "USER_NAME=$(git log -1 --pretty=format:'%an')" >> $GITHUB_OUTPUT
           echo "USER_EMAIL=$(git log -1 --pretty=format:'%ae')" >> $GITHUB_OUTPUT
-
+          
       - name: Deploy to GitHub Pages
         env:
           REMOTE_URL: ${{ github.server_url }}/${{ github.repository }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
           cd docs/.vuepress/dist
-
-          # 初始化 git 并配置
+          
           git init
           git config user.name "${{ steps.git-info.outputs.USER_NAME }}"
           git config user.email "${{ steps.git-info.outputs.USER_EMAIL }}"
           git config init.defaultBranch $DEPLOY_BRANCH
-
-          # 添加文件并提交
+          
           git add -A
-          git commit -m "Auto deploy: ${{ steps.git-info.outputs.COMMIT_INFO }}"
-
-          # 推送到 gh-pages 分支
+          git commit -m "Auto deploy: ${{ steps.git-info.outputs.COMMIT_INFO }} [ci skip]"
+          
           git remote add origin https://${{ github.actor }}:$ACCESS_TOKEN@${REMOTE_URL#https://}
           git push origin HEAD:$DEPLOY_BRANCH --force
