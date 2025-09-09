@@ -31,14 +31,19 @@ jobs:
           cache: "pnpm"
 
       - name: Install pnpm
-        run: npm install -g pnpm@latest
+        run: |
+          # 检查是否已经安装了 pnpm
+          if ! command -v pnpm &> /dev/null; then
+            npm install -g pnpm@latest
+          fi
+          pnpm --version
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Build project
         run: |
-          export NODE_OPTIONS=--max_old_space_size=4096
+          export NODE_OPTIONS=--max_old_space_size=8192
           pnpm run build
 
       - name: Get git metadata
