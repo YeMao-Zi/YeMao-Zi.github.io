@@ -28,17 +28,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
+          cache: "npm"
 
-      - name: Enable corepack and install dependencies
-        run: |
-          corepack enable
-          pnpm install --frozen-lockfile
+      - name: Install pnpm globally
+        run: npm install -g pnpm@latest
 
-      - name: Build project
+      - name: Install dependencies using npx pnpm
+        run: npx pnpm install --frozen-lockfile
+
+      - name: Build project using npx pnpm
         run: |
           export NODE_OPTIONS=--max_old_space_size=4096
-          pnpm run build
+          npx pnpm run build
 
       - name: Get git metadata
         id: git-info
