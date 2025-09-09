@@ -17,17 +17,25 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Install pnpm
         run: npm install -g pnpm@8
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: |
+          # 如果没有 pnpm-lock.yaml，先生成它
+          if [ ! -f "pnpm-lock.yaml" ]; then
+            pnpm install --no-frozen-lockfile
+          else
+            pnpm install --frozen-lockfile
+          fi
 
       - name: Build project
         run: |
