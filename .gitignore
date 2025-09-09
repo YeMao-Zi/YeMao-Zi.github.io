@@ -5,6 +5,9 @@ node_modules
 # yarn
 yarn.lock
 
+# pnpm
+pnpm-lock.yaml
+
 # vscode
 .vscode
 

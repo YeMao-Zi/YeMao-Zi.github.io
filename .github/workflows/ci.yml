@@ -28,15 +28,6 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm@8
 
-      - name: Install dependencies
-        run: |
-          # 如果没有 pnpm-lock.yaml，先生成它
-          if [ ! -f "pnpm-lock.yaml" ]; then
-            pnpm install --no-frozen-lockfile
-          else
-            pnpm install --frozen-lockfile
-          fi
-
       - name: Build project
         run: |
           export NODE_OPTIONS=--max_old_space_size=8192
