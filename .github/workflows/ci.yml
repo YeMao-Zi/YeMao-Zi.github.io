@@ -26,14 +26,11 @@ jobs:
           node-version: "20"
           cache: "pnpm"
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-          run_install: false
-
-      - name: 安装 pnpm (保险)
+      - name: 安装 pnpm
         run: npm install -g pnpm
+
+      - name: 检查 pnpm 版本
+        run: pnpm -v
 
       - name: Install dependencies
         run: pnpm install
