@@ -39,7 +39,7 @@ jobs:
 
       - name: Build project
         run: |
-          export NODE_OPTIONS=--max_old_space_size=4096
+          export NODE_OPTIONS=--max_old_space_size=8192
           pnpm run build
 
       - name: Get git metadata
