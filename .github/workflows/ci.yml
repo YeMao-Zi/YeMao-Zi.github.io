@@ -55,42 +55,61 @@
 
 name: CI
 
-#on: [push]
-
-# 在master分支发生push事件时触发。
 on:
   push:
     branches:
       - master
 
-env: # 设置环境变量
-  TZ: Asia/Shanghai # 时区（设置时区可使页面中的`最近更新时间`使用该时区时间）
+env:
+  TZ: Asia/Shanghai
 
 jobs:
-  build: # 自定义名称
-    runs-on: ubuntu-latest # 运行在虚拟机环境ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
         node-version: [20]
 
     steps:
-      - name: Checkout # 步骤1
-        uses: actions/checkout@v1 # 使用的动作。格式：userName/repoName。作用：检出仓库，获取源码。 官方actions库：https://github.com/actions
-      - name: Use Node.js ${{ matrix.node-version }} # 步骤2
-        uses: actions/setup-node@v1 # 作用：安装nodejs
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }} # 版本
-      - name: Build-and-deploy # 步骤3
+          node-version: ${{ matrix.node-version }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build-and-deploy
         run: |
           remote_addr=`git remote get-url --push origin`
           commit_info=`git describe --all --always --long`
           user_name=`git log -1 --pretty=format:'%an'`
-          user_email=`git log -1 --pretty=format:'%ae'`
+          user_email=`git log-1 --pretty=format:'%ae'`
           deploy_branch=gh-pages
-          yarn
-          export NODE_OPTIONS=--max_old_space_size=4096
-          yarn build
+          export NODE_OPTIONS=--max_old_space_size=8192
+          pnpm build
           cd docs/.vuepress/dist
           git config --global init.defaultBranch $deploy_branch
           git init
@@ -101,5 +120,5 @@ jobs:
           remote_addr=`echo $remote_addr | awk -F'://' '{print $2}'`
           remote_addr=https://${user_name}:${{secrets.ACCESS_TOKEN}}@${remote_addr}
           git remote add origin ${remote_addr}
-          git push origin HEAD:$deploy_branch --force # 推送到github $deploy_branch分支
+          git push origin HEAD:$deploy_branch --force
       # 只提交到github pages也可以使用github-pages-deploy-action，详见: https://github.com/JamesIves/github-pages-deploy-action
