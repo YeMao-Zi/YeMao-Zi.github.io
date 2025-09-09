@@ -242,10 +242,21 @@ export default defineConfig4CustomTheme<blogConfig>({
 
   // 注入到页面<head>中的标签，格式[tagName, { attrName: attrValue }, innerHTML?]
   head: [
-    ["script", { src: "https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js" }],
-    ["script", { src: "https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js" }],
+    [
+      "script",
+      { src: "https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js" },
+    ],
+    [
+      "script",
+      {
+        src: "https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js",
+      },
+    ],
     ["script", { src: "https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js" }],
-    ["script", { src: "https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js" }],
+    [
+      "script",
+      { src: "https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js" },
+    ],
     ["link", { rel: "icon", href: "/img/heimaoio.webp" }], //favicons，资源放在public文件夹
     [
       "meta",
@@ -277,7 +288,10 @@ export default defineConfig4CustomTheme<blogConfig>({
     [
       "one-click-copy", // 代码块复制按钮
       {
-        copySelector: ['div[class*="language-"] pre', 'div[class*="aside-code"] aside'], // String or Array
+        copySelector: [
+          'div[class*="language-"] pre',
+          'div[class*="aside-code"] aside',
+        ], // String or Array
         copyMessage: "复制成功", // default is 'Copy successfully and then paste it for use.'
         duration: 1000, // prompt message display time.
         showInMobile: false, // whether to display on the mobile side, default: false.
@@ -344,7 +358,7 @@ export default defineConfig4CustomTheme<blogConfig>({
 
   markdown: {
     lineNumbers: true,
-    extractHeaders: ["h2", "h3", "h4"], // 提取标题到侧边栏的级别，默认['h2', 'h3']
+    extractHeaders: ["h2", "h3"], // 提取标题到侧边栏的级别，默认['h2', 'h3']
   },
 
   // 监听文件变化并重新构建
