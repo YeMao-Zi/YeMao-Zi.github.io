@@ -39,7 +39,7 @@ jobs:
           user_name=`git log -1 --pretty=format:'%an'`
           user_email=`git log -1 --pretty=format:'%ae'`
           deploy_branch=gh-pages
-          export NODE_OPTIONS=--max_old_space_size=4096
+          export NODE_OPTIONS=--max_old_space_size=8192
           pnpm run build
           cd docs/.vuepress/dist
           git config --global init.defaultBranch $deploy_branch
