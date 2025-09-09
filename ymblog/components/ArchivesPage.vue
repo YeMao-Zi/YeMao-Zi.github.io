@@ -9,7 +9,7 @@
         总共 <i>{{ $sortPostsByDate.length }}</i> 篇文章
       </div>
       <ul>
-        <template v-for="(item, index) in postsList" :key="index">
+        <span v-for="(item, index) in postsList" :key="index">
           <li
             class="year"
             v-if="(year = getYear(index)) !== getYear(index - 1)"
@@ -31,7 +31,7 @@
               </span>
             </router-link>
           </li>
-        </template>
+        </span>
       </ul>
     </div>
   </div>
