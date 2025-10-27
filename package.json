@@ -7,6 +7,7 @@
   ],
   "scripts": {
     "dev": "vuepress dev docs",
+    "docs:check-permalinks": "node utils/checkPermalinks.js",
     "docs:build": "vuepress build docs",
     "build": "vuepress build docs",
     "deploy": "bash deploy.sh",
