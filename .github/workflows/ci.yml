@@ -30,7 +30,7 @@ jobs:
         run: npm install -g pnpm
 
       - name: Install dependencies
-        run: pnpm install --allow-scripts
+        run: pnpm install
       - name: Build-and-deploy
         run: |
           remote_addr=`git remote get-url --push origin`
