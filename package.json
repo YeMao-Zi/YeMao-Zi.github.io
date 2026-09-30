@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "vuepress dev docs",
     "docs:check-permalinks": "node utils/checkPermalinks.js",
-    "docs:build": "vuepress build docs",
+    "docs:findBadFrontmatter": "node utils/findBadFrontmatter.js",
+    "docs:fixBadFrontmatter": "node utils/fixBadFrontmatter.js",
     "build": "vuepress build docs",
     "deploy": "bash deploy.sh",
     "editFm": "node utils/editFrontmatter.js",
